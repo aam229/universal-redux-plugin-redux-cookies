@@ -20,6 +20,13 @@ export default function reducer(state = {}, action = {}) {
   return state;
 }
 
+export function getCookie(state, name){
+  if(!name){
+    return state[COOKIES_REDUCER];
+  } 
+  return state[COOKIES_REDUCER] ? state[COOKIES_REDUCER][name] : null;
+}
+
 export function setCookies(cookies, expires){
   return {
     type: SET_COOKIES,

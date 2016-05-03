@@ -8,8 +8,13 @@ export const COOKIES_REDUCER = 'cookies';
 export default function reducer(state = {}, action = {}) {
   switch(action.type){
     case SET_COOKIES: {
+      const values = {};
       Object.keys(action.payload.values).forEach((key) => {
-        cookies.set(key, action.payload.values[key], { expires: action.payload.expires });
+        cookies.set(key, action.payload.values[key], action.payload.options);
+        values[key] = {
+          value: action.payload.values[key],
+          options: action.payload.options
+        }
       });
       return {
         ...state,
@@ -40,18 +45,16 @@ export function deleteCookies(keys) {
 }
 
 export function getCookie(state, name){
-  if(!name){
-    return state[COOKIES_REDUCER];
-  }
-  return state[COOKIES_REDUCER] ? state[COOKIES_REDUCER][name] : null;
+
+  return state[COOKIES_REDUCER][name] ? state[COOKIES_REDUCER][name].value : null;
 }
 
-export function setCookies(cookies, expires){
+export function setCookies(cookies, options){
   return {
     type: SET_COOKIES,
     payload: {
       values: cookies,
-      expires: expires
+      options
     }
   }
 }

@@ -24,14 +24,19 @@ register(hooks.CREATE_REDUX_REDUCER, function(data){
 });
 
 register(hooks.CREATE_REDUX_STORE, function(props){
+  const cookiesData = cookies.get();
   if(props.data.cookies){
+    Object.keys(cookiesData).forEach((key) => cookies.remove(key));
+    Object.keys(props.data.cookies).forEach((key) => {
+      cookies.set(key, cookiesData[key].value, cookiesData[key].options);
+    });
     return props;
   }
   return {
     ...props,
     data: {
       ...props.data,
-      cookies: cookies.get()
+      cookies: cookiesData
     }
   } ;
 }, {

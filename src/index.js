@@ -24,6 +24,9 @@ register(hooks.CREATE_REDUX_REDUCER, function(data){
 });
 
 register(hooks.CREATE_REDUX_STORE, function(props){
+  if(props.data.cookies){
+    return props;
+  }
   return {
     ...props,
     data: {

@@ -18,7 +18,7 @@ export default function reducer(state = {}, action = {}) {
       });
       return {
         ...state,
-        ...action.payload.values
+        ...values
       }
     }
     case DELETE_COOKIES: {

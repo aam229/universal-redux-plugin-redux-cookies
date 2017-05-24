@@ -1,4 +1,4 @@
-import { hooks, environments, positions, register } from 'universal-redux/lib/hooks';
+import { hooks, environments, positions, register } from 'universal-redux';
 import cookies from 'js-cookie';
 
 import reducer, {
